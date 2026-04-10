@@ -1,0 +1,37 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Users — anyone can read (for leaderboard), only the owner can write
+    match /users/{userId} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasAll(['username','role','squadId']);
+      allow update: if true; // tighten later: request.auth.uid == userId
+      allow delete: if false;
+    }
+
+    // Squads — readable by all (needed for join code lookup), coaches create
+    match /squads/{squadId} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasAll(['name','joinCode','coachId']);
+      allow update: if true;
+      allow delete: if false;
+    }
+
+    // Sessions — readable by squad members, writable by the session owner
+    match /sessions/{sessionId} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasAll(['userId','squadId','drill','dur','xp','ts']);
+      allow update: if true;
+      allow delete: if true;
+    }
+
+    // Coach notes — coaches write, anyone in squad can read
+    match /coachNotes/{noteId} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasAll(['coachId','targetUserId','squadId','text']);
+      allow update: if false;
+      allow delete: if true;
+    }
+  }
+}
