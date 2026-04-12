@@ -274,7 +274,7 @@ select{width:100%;padding:10px 12px;font-size:14px;font-family:'Nunito',sans-ser
   .celebrate-sub{font-size:15px;color:var(--muted);margin-bottom:24px;}
   .celebrate-badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:24px;}
   .celebrate-badge{background:var(--al);border:1.5px solid var(--amber);border-radius:var(--rs);padding:10px 14px;text-align:center;animation:popIn .4s ease;}
-  .confetti{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:50;}
+  .confetti{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:50;display:none;}
 
   /* PROFILE MENU */
   .profile-menu-btn{background:none;border:none;cursor:pointer;font-size:20px;padding:2px 6px;border-radius:8px;}
@@ -937,6 +937,7 @@ function afterCelebrate() {
 let confettiAnimId = null;
 function startConfetti() {
   const canvas = document.getElementById('confettiCanvas');
+  canvas.style.display='block';
   canvas.width = window.innerWidth; canvas.height = window.innerHeight;
   const ctx = canvas.getContext('2d');
   const pieces = Array.from({length: 80}, () => ({
@@ -963,7 +964,7 @@ function startConfetti() {
 function stopConfetti() {
   if (confettiAnimId) cancelAnimationFrame(confettiAnimId);
   const canvas = document.getElementById('confettiCanvas');
-  if (canvas) canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+  if (canvas) { canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height); canvas.style.display='none'; }
 }
 
 // ── PROFILE MENU ──────────────────────────────────────────
