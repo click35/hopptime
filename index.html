@@ -262,7 +262,7 @@ select{width:100%;padding:10px 12px;font-size:14px;font-family:'Nunito',sans-ser
   /* TODAY'S FOCUS */
   .focus-card{background:linear-gradient(135deg,var(--od),var(--orange));border-radius:var(--r);padding:16px;margin-bottom:10px;color:#fff;display:flex;align-items:center;gap:14px;cursor:pointer;}
   .focus-ico{font-size:36px;flex-shrink:0;}
-  .focus-label{font-size:11px;font-weight:700;opacity:.7;text-transform:uppercase;letter-spacing:.06em;}
+  .focus-label{font-size:12px;font-weight:700;opacity:.85;letter-spacing:.02em;margin-bottom:1px;}
   .focus-drill{font-family:'Bangers',cursive;font-size:24px;letter-spacing:1px;}
   .focus-sub{font-size:12px;opacity:.75;margin-top:2px;}
 
@@ -409,9 +409,9 @@ select{width:100%;padding:10px 12px;font-size:14px;font-family:'Nunito',sans-ser
       <div class="focus-card" id="focusCard" onclick="goTab('train')">
         <div class="focus-ico" id="focusIco">🏀</div>
         <div>
-          <div class="focus-label">Today's focus</div>
+          <div class="focus-label">💡 Suggested drill</div>
           <div class="focus-drill" id="focusDrill">Shooting</div>
-          <div class="focus-sub">Tap to start training →</div>
+          <div class="focus-sub" id="focusSub">You haven't practised this in a while →</div>
         </div>
       </div>
       <div id="shotsTodayCard" class="shots-card" style="display:none;">
@@ -433,7 +433,11 @@ select{width:100%;padding:10px 12px;font-size:14px;font-family:'Nunito',sans-ser
       </div>
       <div id="nextGoalEl" class="next-goal" style="display:none;">
         <div class="ng-ico" id="ngIco"></div>
-        <div><div class="ng-txt" id="ngName"></div><div class="ng-desc" id="ngDesc"></div></div>
+        <div>
+          <div style="font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px;">🏅 Next badge to unlock</div>
+          <div class="ng-txt" id="ngName"></div>
+          <div class="ng-desc" id="ngDesc"></div>
+        </div>
       </div>
       <div class="card">
         <div class="slbl">Recent sessions</div>
@@ -896,7 +900,6 @@ function pickMood(m) {
 // ── TODAY'S FOCUS ─────────────────────────────────────────
 function renderTodaysFocus(ss) {
   const drills = ['shooting','dribbling','layups','mikan','freethrows','oneone'];
-  // Find the drill done least recently
   const lastDone = {};
   drills.forEach(d => { lastDone[d] = 0; });
   (ss || []).forEach(s => { if (lastDone[s.drill] !== undefined) lastDone[s.drill] = Math.max(lastDone[s.drill], s.ts); });
@@ -904,6 +907,19 @@ function renderTodaysFocus(ss) {
   const d = DRILLS.find(x => x.id === focus);
   document.getElementById('focusIco').textContent = d ? d.ico : '🏀';
   document.getElementById('focusDrill').textContent = d ? d.nm : 'Shooting';
+  // Show a reason
+  const last = lastDone[focus];
+  let sub = 'Tap to start →';
+  if (!last) {
+    sub = "You haven't tried this drill yet →";
+  } else {
+    const days = Math.floor((Date.now() - last) / 86400000);
+    if (days === 0) sub = 'Keep it going — tap to train →';
+    else if (days === 1) sub = 'Last practiced yesterday — keep the streak →';
+    else sub = 'Last practiced ' + days + ' days ago — time to rep it →';
+  }
+  const subEl = document.getElementById('focusSub');
+  if (subEl) subEl.textContent = sub;
 }
 
 // ── CELEBRATION ───────────────────────────────────────────
@@ -931,6 +947,7 @@ function afterCelebrate() {
   stopConfetti();
   showScreen('s-app');
   goTab('home');
+  refreshHome();
 }
 
 // ── CONFETTI ──────────────────────────────────────────────
@@ -1089,12 +1106,23 @@ function sessHTML(s){
 // ── NEXT GOAL ────────────────────────────────────────────
 function showNextGoal(u,ss){
   const el=document.getElementById('nextGoalEl');
-  const next=BADGES.find(b=>!u.earned.includes(b.id));
+  const next=BADGES.find(b=>!(u.earned||[]).includes(b.id));
   if(!next){el.style.display='none';return;}
   el.style.display='flex';
   document.getElementById('ngIco').textContent=next.ico;
-  document.getElementById('ngName').textContent='Next: '+next.nm;
-  document.getElementById('ngDesc').textContent=next.desc;
+  document.getElementById('ngName').textContent=next.nm;
+  // Show progress where possible
+  let progress = '';
+  if(next.id==='s5') progress = (ss.length)+' / 5 sessions';
+  else if(next.id==='s10') progress = (ss.length)+' / 10 sessions';
+  else if(next.id==='s25') progress = (ss.length)+' / 25 sessions';
+  else if(next.id==='shots100') progress = ss.reduce((a,s)=>a+(s.shots||0),0)+' / 100 shots logged';
+  else if(next.id==='str3') progress = (u.longestStreak||0)+' / 3 day streak';
+  else if(next.id==='str7') progress = (u.longestStreak||0)+' / 7 day streak';
+  else if(next.id==='xp500') progress = (u.xp||0)+' / 500 XP';
+  else if(next.id==='xp1k') progress = (u.xp||0)+' / 1000 XP';
+  else progress = next.desc;
+  document.getElementById('ngDesc').textContent = progress;
 }
 
 // ── TRAIN ────────────────────────────────────────────────
