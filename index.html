@@ -1192,7 +1192,7 @@ function showXPPop(xp){
   el.className='xp-pop';el.textContent='+'+xp+' XP!';
   w.appendChild(el);setTimeout(()=>el.remove(),1700);
 }
-document.getElementById('shotsIn').addEventListener('input',updateXPPreview);
+// shot counter updates handled via adjShots()
 
 // ── EDIT/DELETE ───────────────────────────────────────────
 function openEdit(sessionId){
