@@ -129,8 +129,8 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Nunito
 .act-btn:active{transform:scale(0.94);}
 
 /* ── DRILL GRID ── */
-.drill-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:10px 0;}
-.drill-btn{border:1.5px solid var(--border);border-radius:var(--rs);background:var(--bg);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px 4px;font-size:11px;font-weight:700;color:var(--muted);transition:all .15s;font-family:'Nunito',sans-serif;}
+.drill-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0;}
+.drill-btn{border:1.5px solid var(--border);border-radius:var(--rs);background:var(--bg);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:14px 6px;font-size:12px;font-weight:700;color:var(--muted);transition:all .15s;font-family:'Nunito',sans-serif;}
 .drill-btn.sel{border:2.5px solid var(--blue);background:var(--bl);color:var(--bd);transform:scale(1.04);}
 .drill-btn:active{transform:scale(0.96);}
 .drill-ico{font-size:24px;}
@@ -225,7 +225,7 @@ select{width:100%;padding:10px 12px;font-size:14px;font-family:'Nunito',sans-ser
 .modal-title{font-family:'Bangers',cursive;font-size:22px;letter-spacing:1px;margin-bottom:16px;}
 .mf{margin-bottom:14px;}
 .mf label{display:block;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
-.m-drill-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:2px;}
+.m-drill-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:2px;}
 .m-drill-btn{border:1.5px solid var(--border);border-radius:8px;background:var(--bg);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 2px;font-size:10px;font-weight:700;color:var(--muted);font-family:'Nunito',sans-serif;}
 .m-drill-btn.sel{border-color:var(--blue);background:var(--bl);color:var(--bd);}
 .m-drill-ico{font-size:20px;}
@@ -235,6 +235,56 @@ select{width:100%;padding:10px 12px;font-size:14px;font-family:'Nunito',sans-ser
 .m-cancel{padding:14px 16px;font-size:15px;font-weight:700;font-family:'Nunito',sans-serif;background:var(--bg);color:var(--muted);border:1.5px solid var(--border);border-radius:var(--rs);cursor:pointer;}
 .m-del{padding:14px;font-size:15px;font-weight:700;font-family:'Nunito',sans-serif;background:var(--rl);color:var(--red);border:1.5px solid rgba(226,75,74,.3);border-radius:var(--rs);cursor:pointer;}
 .loading-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:200;display:flex;align-items:center;justify-content:center;}
+
+  /* SHOT COUNTER */
+  .shot-counter{display:flex;align-items:center;gap:0;border:1.5px solid var(--border);border-radius:var(--rs);overflow:hidden;background:var(--card);}
+  .shot-btn{width:52px;height:52px;font-size:24px;font-weight:700;border:none;background:var(--bg);color:var(--text);cursor:pointer;flex-shrink:0;transition:all .1s;}
+  .shot-btn:active{background:var(--orange);color:#fff;transform:scale(0.94);}
+  .shot-val{flex:1;text-align:center;font-family:'Bangers',cursive;font-size:32px;letter-spacing:1px;padding:8px 0;}
+  .shot-xp-hint{font-size:11px;color:var(--purple);font-weight:700;text-align:center;margin-top:4px;}
+
+  /* TIMER */
+  .timer-wrap{text-align:center;margin:8px 0;}
+  .timer-disp{font-family:'Bangers',cursive;font-size:48px;letter-spacing:3px;color:var(--text);line-height:1;}
+  .timer-btns{display:flex;gap:8px;justify-content:center;margin-top:8px;}
+  .timer-start{padding:10px 28px;font-size:14px;font-weight:700;font-family:'Nunito',sans-serif;background:var(--green);color:#fff;border:none;border-radius:var(--rs);cursor:pointer;}
+  .timer-stop{padding:10px 28px;font-size:14px;font-weight:700;font-family:'Nunito',sans-serif;background:var(--red);color:#fff;border:none;border-radius:var(--rs);cursor:pointer;display:none;}
+  .timer-reset{padding:10px 16px;font-size:14px;font-weight:700;font-family:'Nunito',sans-serif;background:var(--bg);color:var(--muted);border:1.5px solid var(--border);border-radius:var(--rs);cursor:pointer;display:none;}
+  .timer-start:active,.timer-stop:active,.timer-reset:active{transform:scale(0.96);}
+
+  /* MINDSET CHECK-IN */
+  .mindset-wrap{display:flex;gap:6px;margin:6px 0 10px;}
+  .mood-btn{flex:1;padding:10px 4px;font-size:22px;border:2px solid var(--border);border-radius:var(--rs);background:var(--bg);cursor:pointer;text-align:center;transition:all .15s;display:flex;flex-direction:column;align-items:center;gap:2px;}
+  .mood-btn span{font-size:10px;font-weight:700;color:var(--muted);}
+  .mood-btn.sel{border-color:var(--orange);background:var(--ol);transform:scale(1.06);}
+  .mood-btn:active{transform:scale(0.95);}
+
+  /* TODAY'S FOCUS */
+  .focus-card{background:linear-gradient(135deg,var(--od),var(--orange));border-radius:var(--r);padding:16px;margin-bottom:10px;color:#fff;display:flex;align-items:center;gap:14px;cursor:pointer;}
+  .focus-ico{font-size:36px;flex-shrink:0;}
+  .focus-label{font-size:11px;font-weight:700;opacity:.7;text-transform:uppercase;letter-spacing:.06em;}
+  .focus-drill{font-family:'Bangers',cursive;font-size:24px;letter-spacing:1px;}
+  .focus-sub{font-size:12px;opacity:.75;margin-top:2px;}
+
+  /* CELEBRATION SCREEN */
+  #s-celebrate{align-items:center;justify-content:center;padding:2rem;text-align:center;background:var(--bg);}
+  .celebrate-xp{font-family:'Bangers',cursive;font-size:72px;color:var(--orange);letter-spacing:2px;animation:popIn .5s cubic-bezier(.22,.68,0,1.4);}
+  @keyframes popIn{0%{transform:scale(0);opacity:0}100%{transform:scale(1);opacity:1}}
+  .celebrate-msg{font-family:'Bangers',cursive;font-size:28px;letter-spacing:1px;margin:8px 0;}
+  .celebrate-sub{font-size:15px;color:var(--muted);margin-bottom:24px;}
+  .celebrate-badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:24px;}
+  .celebrate-badge{background:var(--al);border:1.5px solid var(--amber);border-radius:var(--rs);padding:10px 14px;text-align:center;animation:popIn .4s ease;}
+  .confetti{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:50;}
+
+  /* PROFILE MENU */
+  .profile-menu-btn{background:none;border:none;cursor:pointer;font-size:20px;padding:2px 6px;border-radius:8px;}
+  .profile-menu-btn:active{background:var(--border);}
+  .profile-drawer{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:500px;background:var(--card);border-radius:var(--r) var(--r) 0 0;padding:20px 16px 36px;z-index:99;border-top:1px solid var(--border);animation:slideUp .2s ease;}
+  .profile-option{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--border);cursor:pointer;font-size:15px;font-weight:600;}
+  .profile-option:last-child{border-bottom:none;}
+  .profile-option-ico{font-size:22px;width:32px;text-align:center;}
+  .profile-option.danger{color:var(--red);}
+
 </style>
 </head>
 <body>
@@ -299,6 +349,24 @@ select{width:100%;padding:10px 12px;font-size:14px;font-family:'Nunito',sans-ser
   </div>
 </div>
 
+
+<!-- ── CELEBRATION ── -->
+<div class="screen" id="s-celebrate">
+  <canvas class="confetti" id="confettiCanvas"></canvas>
+  <div style="position:relative;z-index:2;text-align:center;padding:2rem 1.5rem;width:100%;">
+    <div style="font-size:56px;margin-bottom:8px;">🏀</div>
+    <div class="celebrate-xp" id="celXP">+37 XP</div>
+    <div class="celebrate-msg" id="celMsg">NICE WORK!</div>
+    <div class="celebrate-sub" id="celSub">30 min · Dribbling</div>
+    <div class="celebrate-badges" id="celBadges"></div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:16px;">
+      <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">Streak</div>
+      <div style="font-family:'Bangers',cursive;font-size:36px;color:var(--teal);" id="celStreak">🔥 1 day</div>
+    </div>
+    <button class="primary-btn" onclick="afterCelebrate()">Back to home 🏠</button>
+  </div>
+</div>
+
 <!-- ── MAIN APP ── -->
 <div class="screen" id="s-app">
   <!-- HEADER -->
@@ -338,6 +406,14 @@ select{width:100%;padding:10px 12px;font-size:14px;font-family:'Nunito',sans-ser
     <!-- HOME -->
     <div class="view active" id="v-home">
       <div class="motto" id="mottoTxt"></div>
+      <div class="focus-card" id="focusCard" onclick="goTab('train')">
+        <div class="focus-ico" id="focusIco">🏀</div>
+        <div>
+          <div class="focus-label">Today's focus</div>
+          <div class="focus-drill" id="focusDrill">Shooting</div>
+          <div class="focus-sub">Tap to start training →</div>
+        </div>
+      </div>
       <div id="shotsTodayCard" class="shots-card" style="display:none;">
         <div class="shots-row">
           <div>
@@ -382,13 +458,38 @@ select{width:100%;padding:10px 12px;font-size:14px;font-family:'Nunito',sans-ser
           <input type="range" min="5" max="120" step="5" value="30" id="durSlider" oninput="updDur(this.value)">
           <div class="dur-disp" id="durDisp">30 min</div>
         </div>
-        <div style="margin-top:8px;">
-          <div class="slbl">Shots made <span style="font-weight:400;font-size:10px;">(+2 XP per 10 shots)</span></div>
-          <input type="number" id="shotsIn" placeholder="e.g. 50" min="0" max="9999">
+        <div style="margin-top:12px;">
+          <div class="slbl">⏱ Session timer</div>
+          <div class="timer-wrap">
+            <div class="timer-disp" id="timerDisp">00:00</div>
+            <div class="timer-btns">
+              <button class="timer-start" id="timerStartBtn" onclick="startTimer()">▶ Start</button>
+              <button class="timer-stop" id="timerStopBtn" onclick="stopTimer()">⏹ Stop</button>
+              <button class="timer-reset" id="timerResetBtn" onclick="resetTimer()">Reset</button>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:4px;">
+          <div class="slbl">Shots made <span style="font-weight:400;font-size:10px;">(+2 XP per 10)</span></div>
+          <div class="shot-counter">
+            <button class="shot-btn" onclick="adjShots(-1)">−</button>
+            <div class="shot-val" id="shotVal">0</div>
+            <button class="shot-btn" onclick="adjShots(1)">+</button>
+          </div>
+          <div class="shot-xp-hint" id="shotXPHint"></div>
         </div>
         <div style="margin-top:10px;">
+          <div class="slbl">🧠 How are you feeling?</div>
+          <div class="mindset-wrap">
+            <button class="mood-btn" id="mood-focused" onclick="pickMood('focused')">😤<span>Focused</span></button>
+            <button class="mood-btn" id="mood-fired" onclick="pickMood('fired')">🔥<span>Fired up</span></button>
+            <button class="mood-btn" id="mood-ok" onclick="pickMood('ok')">😐<span>Average</span></button>
+            <button class="mood-btn" id="mood-tired" onclick="pickMood('tired')">😴<span>Tired</span></button>
+          </div>
+        </div>
+        <div style="margin-top:6px;">
           <div class="slbl">Notes (optional)</div>
-          <textarea id="notesIn" placeholder="e.g. Crossover felt clean today!" style="height:64px;"></textarea>
+          <textarea id="notesIn" placeholder="e.g. Crossover felt clean today!" style="height:56px;"></textarea>
         </div>
         <button class="log-btn" id="logBtn" onclick="logSession()" disabled>Choose a drill above</button>
         <div class="xp-breakdown" id="xpBreakdown"></div>
@@ -532,7 +633,6 @@ const DRILLS=[
   {id:'layups',ico:'🎽',nm:'Layups'},
   {id:'mikan',ico:'🔄',nm:'Mikan'},
   {id:'freethrows',ico:'🎯',nm:'Free Throws'},
-  {id:'conditioning',ico:'🏃',nm:'Fitness'},
   {id:'oneone',ico:'🤝',nm:'1:1'},
 ];
 const LEVELS=[
@@ -735,6 +835,158 @@ function subscribeToData(){
 
 function cleanup(){unsubs.forEach(u=>u());unsubs.length=0;}
 
+
+// ── SHOT COUNTER ─────────────────────────────────────────
+let shotCount = 0;
+function adjShots(delta) {
+  shotCount = Math.max(0, shotCount + delta);
+  document.getElementById('shotVal').textContent = shotCount;
+  const bonus = Math.floor(shotCount / 10) * 2;
+  document.getElementById('shotXPHint').textContent = bonus > 0 ? '+' + bonus + ' bonus XP' : '';
+  updateXPPreview();
+}
+
+// ── TIMER ────────────────────────────────────────────────
+let timerSecs = 0, timerInterval = null, timerRunning = false;
+function startTimer() {
+  if (timerRunning) return;
+  timerRunning = true;
+  document.getElementById('timerStartBtn').style.display = 'none';
+  document.getElementById('timerStopBtn').style.display = 'inline-block';
+  document.getElementById('timerResetBtn').style.display = 'none';
+  timerInterval = setInterval(() => {
+    timerSecs++;
+    const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
+    const s = String(timerSecs % 60).padStart(2, '0');
+    document.getElementById('timerDisp').textContent = m + ':' + s;
+  }, 1000);
+}
+function stopTimer() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+  const mins = Math.max(5, Math.round(timerSecs / 60));
+  // Round to nearest 5 for the slider
+  const snapped = Math.min(120, Math.round(mins / 5) * 5);
+  document.getElementById('durSlider').value = snapped;
+  document.getElementById('durDisp').textContent = snapped + ' min';
+  document.getElementById('timerStopBtn').style.display = 'none';
+  document.getElementById('timerResetBtn').style.display = 'inline-block';
+  document.getElementById('timerStartBtn').style.display = 'inline-block';
+  document.getElementById('timerStartBtn').textContent = '▶ Resume';
+  updateXPPreview();
+}
+function resetTimer() {
+  clearInterval(timerInterval);
+  timerRunning = false; timerSecs = 0;
+  document.getElementById('timerDisp').textContent = '00:00';
+  document.getElementById('timerStartBtn').style.display = 'inline-block';
+  document.getElementById('timerStartBtn').textContent = '▶ Start';
+  document.getElementById('timerStopBtn').style.display = 'none';
+  document.getElementById('timerResetBtn').style.display = 'none';
+}
+
+// ── MINDSET ──────────────────────────────────────────────
+let selectedMood = null;
+function pickMood(m) {
+  selectedMood = m;
+  document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('sel'));
+  document.getElementById('mood-' + m).classList.add('sel');
+}
+
+// ── TODAY'S FOCUS ─────────────────────────────────────────
+function renderTodaysFocus(ss) {
+  const drills = ['shooting','dribbling','layups','mikan','freethrows','oneone'];
+  // Find the drill done least recently
+  const lastDone = {};
+  drills.forEach(d => { lastDone[d] = 0; });
+  (ss || []).forEach(s => { if (lastDone[s.drill] !== undefined) lastDone[s.drill] = Math.max(lastDone[s.drill], s.ts); });
+  const focus = drills.reduce((a, b) => lastDone[a] <= lastDone[b] ? a : b);
+  const d = DRILLS.find(x => x.id === focus);
+  document.getElementById('focusIco').textContent = d ? d.ico : '🏀';
+  document.getElementById('focusDrill').textContent = d ? d.nm : 'Shooting';
+}
+
+// ── CELEBRATION ───────────────────────────────────────────
+let celebrateNewBadges = [];
+function showCelebration(xp, drill, dur, newBadges) {
+  celebrateNewBadges = newBadges || [];
+  const msgs = ['NICE WORK!', 'LETS GO!', 'GRINDER!', 'KEEP IT UP!', 'BALLER!'];
+  document.getElementById('celXP').textContent = '+' + xp + ' XP';
+  document.getElementById('celMsg').textContent = msgs[Math.floor(Math.random() * msgs.length)];
+  document.getElementById('celSub').textContent = dur + ' min · ' + drill;
+  document.getElementById('celStreak').textContent = '🔥 ' + (S.user.streak || 1) + (S.user.streak === 1 ? ' day' : ' days');
+  const badgesEl = document.getElementById('celBadges');
+  if (newBadges.length) {
+    badgesEl.innerHTML = newBadges.map(id => {
+      const b = BADGES.find(x => x.id === id);
+      return b ? '<div class="celebrate-badge"><div style="font-size:28px;">' + b.ico + '</div><div style="font-size:11px;font-weight:700;color:var(--ad);margin-top:3px;">' + b.nm + '</div></div>' : '';
+    }).join('');
+  } else {
+    badgesEl.innerHTML = '';
+  }
+  showScreen('s-celebrate');
+  startConfetti();
+}
+function afterCelebrate() {
+  stopConfetti();
+  showScreen('s-app');
+  goTab('home');
+}
+
+// ── CONFETTI ──────────────────────────────────────────────
+let confettiAnimId = null;
+function startConfetti() {
+  const canvas = document.getElementById('confettiCanvas');
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+  const ctx = canvas.getContext('2d');
+  const pieces = Array.from({length: 80}, () => ({
+    x: Math.random() * canvas.width, y: -20,
+    w: 8 + Math.random() * 8, h: 4 + Math.random() * 4,
+    color: ['#D85A30','#378ADD','#5DCAA5','#EA9427','#7F77DD','#E24B4A'][Math.floor(Math.random()*6)],
+    rot: Math.random() * 360, rotS: (Math.random() - 0.5) * 6,
+    vx: (Math.random() - 0.5) * 3, vy: 2 + Math.random() * 3,
+  }));
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    pieces.forEach(p => {
+      p.x += p.vx; p.y += p.vy; p.rot += p.rotS;
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot * Math.PI / 180);
+      ctx.fillStyle = p.color; ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+      ctx.restore();
+      if (p.y > canvas.height) { p.y = -10; p.x = Math.random() * canvas.width; }
+    });
+    confettiAnimId = requestAnimationFrame(draw);
+  }
+  draw();
+  setTimeout(stopConfetti, 4000);
+}
+function stopConfetti() {
+  if (confettiAnimId) cancelAnimationFrame(confettiAnimId);
+  const canvas = document.getElementById('confettiCanvas');
+  if (canvas) canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+}
+
+// ── PROFILE MENU ──────────────────────────────────────────
+function openProfileMenu() {
+  document.getElementById('profileName').textContent = S.user ? S.user.username : '—';
+  document.getElementById('profileOverlay').style.display = 'flex';
+}
+function closeProfileMenu() {
+  document.getElementById('profileOverlay').style.display = 'none';
+}
+function switchProfile() {
+  closeProfileMenu();
+  if (confirm('Switch profile? You can come back by re-entering your join code.')) {
+    resetApp();
+  }
+}
+function confirmReset() {
+  closeProfileMenu();
+  if (confirm('Sign out and reset? This removes your profile from this device.')) {
+    resetApp();
+  }
+}
+
 // ── INIT ─────────────────────────────────────────────────
 async function init(){
   S.uid=localStorage.getItem('hl_uid');
@@ -748,15 +1000,18 @@ async function init(){
       if(squadDoc.exists)S.squad={id:squadDoc.id,...squadDoc.data()};
       enterApp();
     } else {
-      enterApp();
       if(S.user.role==='coach'){
         document.getElementById('coachSquadForm').style.display='block';
         document.getElementById('playerSquadForm').style.display='none';
         document.getElementById('squadHeading').textContent='Create your squad';
+        document.getElementById('squadSub').textContent='Give your squad a name. Players use your join code to connect.';
+        document.getElementById('squadIco').textContent='📋';
       } else {
         document.getElementById('coachSquadForm').style.display='none';
         document.getElementById('playerSquadForm').style.display='block';
         document.getElementById('squadHeading').textContent='Join your squad';
+        document.getElementById('squadSub').textContent='Ask your coach for the 6-character join code.';
+        document.getElementById('squadIco').textContent='🏀';
       }
       showScreen('s-squad');
     }
@@ -798,6 +1053,7 @@ function refreshHome(){
   renderHistory(ss);
   checkBadges(u,ss);
   showNextGoal(u,ss);
+  renderTodaysFocus(ss);
 }
 
 function renderRecent(ss){
@@ -861,17 +1117,18 @@ function updDur(v){
 function updateXPPreview(){
   if(!S.selDrill)return;
   const dur=parseInt(document.getElementById('durSlider').value);
-  const shots=parseInt(document.getElementById('shotsIn').value)||0;
-  const{total,durXP,shotXP}=calcXP(dur,shots);
+  const shots = shotCount || 0;
+  const shots2 = shotCount || 0;
+  const{total,durXP,shotXP}=calcXP(dur,shots2);
   document.getElementById('logBtn').textContent=`Log session — earn ${total} XP! 🚀`;
   document.getElementById('xpBreakdown').textContent=
-    shots>0?`${durXP} session XP + ${shotXP} shot bonus XP`:'';
+    shots2>0?`${durXP} session XP + ${shotXP} shot bonus XP`:'';
 }
 
 async function logSession(){
   if(!S.selDrill)return;
   const dur=parseInt(document.getElementById('durSlider').value);
-  const shots=parseInt(document.getElementById('shotsIn').value)||0;
+  const shots = shotCount || 0;
   const notes=document.getElementById('notesIn').value.trim();
   const d=DRILLS.find(x=>x.id===S.selDrill);
   const{total:xp}=calcXP(dur,shots);
@@ -892,6 +1149,7 @@ async function logSession(){
   const sessData={
     userId:S.uid,squadId:S.user.squadId||'none',
     username:S.user.username,
+    mood:selectedMood,
     drill:S.selDrill,nm:d.nm,ico:d.ico,
     dur,shots,notes,xp,
     date:new Date().toLocaleDateString('en-AU',{weekday:'short',month:'short',day:'numeric'}),
@@ -910,17 +1168,23 @@ async function logSession(){
   setSync(false);
   showXPPop(xp);
   // Reset form
-  S.selDrill=null;
+  const loggedDrill = d.nm;
+  const loggedDur = dur;
+  S.selDrill=null; shotCount=0;
   document.querySelectorAll('.drill-btn').forEach(b=>b.classList.remove('sel'));
   document.getElementById('durSlider').value=30;
   document.getElementById('durDisp').textContent='30 min';
-  document.getElementById('shotsIn').value='';
+  document.getElementById('shotVal').textContent='0';
+  document.getElementById('shotXPHint').textContent='';
   document.getElementById('notesIn').value='';
   document.getElementById('logBtn').disabled=true;
   document.getElementById('logBtn').textContent='Choose a drill above';
   document.getElementById('xpBreakdown').textContent='';
+  selectedMood=null;
+  document.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('sel'));
+  resetTimer();
   refreshHeader();
-  setTimeout(()=>goTab('home'),700);
+  showCelebration(xp, loggedDrill, loggedDur, newEarned);
 }
 function showXPPop(xp){
   const w=document.getElementById('popWrap');
@@ -1231,5 +1495,20 @@ document.getElementById('inJoinCode').addEventListener('input',e=>{e.target.valu
 if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}
 window.addEventListener('load',()=>{ if(!db){showScreen('s-setup');return;} init().catch(e=>{console.error(e);localStorage.removeItem('hl_uid');showScreen('s-setup');}); });
 </script>
+
+<!-- PROFILE DRAWER -->
+<div class="overlay" id="profileOverlay" style="display:none;" onclick="if(event.target===this)closeProfileMenu()">
+  <div class="profile-drawer">
+    <div style="font-size:13px;color:var(--muted);margin-bottom:4px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;">Signed in as</div>
+    <div style="font-family:'Bangers',cursive;font-size:22px;letter-spacing:1px;margin-bottom:16px;" id="profileName">—</div>
+    <div class="profile-option" onclick="closeProfileMenu();goTab('home')"><span class="profile-option-ico">🏠</span>Home</div>
+    <div class="profile-option" onclick="closeProfileMenu();goTab('squad')"><span class="profile-option-ico">👥</span>Squad</div>
+    <div class="profile-option" onclick="closeProfileMenu();goTab('badges')"><span class="profile-option-ico">🏅</span>Badges</div>
+    <div class="profile-option" onclick="switchProfile()" style="margin-top:8px;"><span class="profile-option-ico">🔄</span>Switch profile</div>
+    <div class="profile-option danger" onclick="confirmReset()"><span class="profile-option-ico">🚪</span>Sign out &amp; reset</div>
+    <button class="secondary-btn" style="margin-top:16px;" onclick="closeProfileMenu()">Cancel</button>
+  </div>
+</div>
+
 </body>
 </html>
