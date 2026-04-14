@@ -164,6 +164,43 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Nunito
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.08);}
 .divider span{font-size:12px;color:var(--muted);}
 
+/* ── AUTH SCREENS ── */
+.welcome-btn-new{
+  width:100%;padding:20px;
+  font-size:18px;font-weight:700;
+  font-family:'Barlow Condensed',sans-serif;font-style:italic;
+  letter-spacing:.06em;text-transform:uppercase;
+  background:linear-gradient(135deg,var(--gold),#FFBE4A);
+  color:#0D0800;border:none;border-radius:var(--rs);
+  cursor:pointer;transition:all .15s;margin-bottom:12px;
+}
+.welcome-btn-return{
+  width:100%;padding:18px;
+  font-size:17px;font-weight:700;
+  font-family:'Barlow Condensed',sans-serif;font-style:italic;
+  letter-spacing:.06em;text-transform:uppercase;
+  background:var(--card2);color:var(--royal);
+  border:2px solid rgba(30,144,255,0.4);
+  border-radius:var(--rs);cursor:pointer;transition:all .15s;
+}
+.welcome-btn-new:active,.welcome-btn-return:active{transform:scale(0.97);}
+.back-link{
+  background:none;border:none;cursor:pointer;
+  color:var(--muted);font-size:13px;font-weight:700;
+  font-family:'Nunito',sans-serif;
+  text-decoration:underline;margin-top:12px;
+}
+.pw-wrap{position:relative;width:100%;margin-bottom:14px;}
+.pw-wrap .txt-input{margin-bottom:0;padding-right:48px;width:100%;}
+.pw-toggle{
+  position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  background:none;border:none;cursor:pointer;
+  font-size:18px;color:var(--muted);padding:4px;line-height:1;
+}
+.strength-bar{height:4px;border-radius:2px;margin-top:6px;background:rgba(255,255,255,0.08);overflow:hidden;}
+.strength-fill{height:100%;border-radius:2px;transition:width .3s,background .3s;width:0%;}
+.strength-lbl{font-size:11px;color:var(--muted);margin-top:3px;text-align:right;min-height:16px;}
+
 /* ── MAIN APP HEADER ── */
 #header{
   background:var(--card);
@@ -807,21 +844,62 @@ select{
   <div class="spinner" style="margin-top:8px;"></div>
 </div>
 
-<!-- ── USERNAME + ROLE ── -->
-<div class="screen" id="s-setup">
+<!-- ── WELCOME ── -->
+<div class="screen" id="s-welcome">
   <div class="setup-wrap">
     <div class="logo-ball">🏀</div>
     <div class="logo-title">Hoop Log</div>
     <p class="logo-sub">Track your grind, earn XP,<br>and compete with your squad.</p>
-    <div class="field-lbl">Your name</div>
+    <button class="welcome-btn-new" onclick="showScreen('s-setup')">🏀 New Player</button>
+    <button class="welcome-btn-return" onclick="showScreen('s-login')">🔑 Returning Player</button>
+  </div>
+</div>
+
+<!-- ── NEW PLAYER SIGNUP ── -->
+<div class="screen" id="s-setup">
+  <div class="setup-wrap">
+    <div class="logo-title" style="font-size:32px;margin-bottom:4px;">Create Account</div>
+    <p class="logo-sub" style="margin-bottom:20px;">Pick a username and password.</p>
+    <div class="field-lbl">Username</div>
     <input id="inUsername" class="txt-input" type="text" placeholder="e.g. Jordan, Bronny..." maxlength="20" autocomplete="off">
+    <div class="field-lbl">Password <span style="font-weight:400;font-style:normal;text-transform:none;letter-spacing:0;font-size:11px;color:var(--muted);">(6+ characters)</span></div>
+    <div class="pw-wrap">
+      <input id="inPassword" class="txt-input" type="password" placeholder="Choose a password" maxlength="50" autocomplete="new-password" oninput="checkStrength(this.value)">
+      <button type="button" class="pw-toggle" onclick="togglePw('inPassword',this)" tabindex="-1">👁</button>
+    </div>
+    <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+    <div class="strength-lbl" id="strengthLbl"></div>
+    <div class="field-lbl" style="margin-top:10px;">Confirm Password</div>
+    <div class="pw-wrap">
+      <input id="inPassword2" class="txt-input" type="password" placeholder="Repeat your password" maxlength="50" autocomplete="new-password">
+      <button type="button" class="pw-toggle" onclick="togglePw('inPassword2',this)" tabindex="-1">👁</button>
+    </div>
     <div class="field-lbl">I am a...</div>
     <div class="role-toggle">
       <button class="role-btn sel" id="rolePlayer" onclick="pickRole('player')">🏀 Player</button>
       <button class="role-btn" id="roleCoach" onclick="pickRole('coach')">📋 Coach</button>
     </div>
     <div class="err-msg" id="setupErr"></div>
-    <button class="primary-btn" onclick="submitSetup()">Continue →</button>
+    <button class="primary-btn" onclick="submitSetup()">Create Account →</button>
+    <button class="back-link" onclick="showScreen('s-welcome')">← Back</button>
+  </div>
+</div>
+
+<!-- ── RETURNING PLAYER LOGIN ── -->
+<div class="screen" id="s-login">
+  <div class="setup-wrap">
+    <div class="logo-title" style="font-size:32px;margin-bottom:4px;">Welcome Back</div>
+    <p class="logo-sub" style="margin-bottom:20px;">Sign in to your account.</p>
+    <div class="field-lbl">Username</div>
+    <input id="inLoginUsername" class="txt-input" type="text" placeholder="Your username" maxlength="20" autocomplete="username">
+    <div class="field-lbl">Password</div>
+    <div class="pw-wrap">
+      <input id="inLoginPassword" class="txt-input" type="password" placeholder="Your password" maxlength="50" autocomplete="current-password">
+      <button type="button" class="pw-toggle" onclick="togglePw('inLoginPassword',this)" tabindex="-1">👁</button>
+    </div>
+    <div class="err-msg" id="loginErr"></div>
+    <button class="primary-btn" onclick="submitLogin()">Sign In →</button>
+    <button class="back-link" onclick="showScreen('s-welcome')">← Back</button>
   </div>
 </div>
 
@@ -1247,6 +1325,38 @@ function showScreen(id){document.querySelectorAll('.screen').forEach(s=>{s.class
 function showErr(id,msg){document.getElementById(id).textContent=msg;}
 function setSync(on){document.getElementById('syncMsg').classList.toggle('show',on);}
 
+// ── PASSWORD UTILS ────────────────────────────────────────
+async function hashPassword(pw){
+  const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(pw));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+function togglePw(id,btn){
+  const el=document.getElementById(id);
+  const show=el.type==='password';
+  el.type=show?'text':'password';
+  btn.textContent=show?'🙈':'👁';
+}
+function checkStrength(pw){
+  const fill=document.getElementById('strengthFill');
+  const lbl=document.getElementById('strengthLbl');
+  if(!pw){fill.style.width='0%';lbl.textContent='';return;}
+  let score=0;
+  if(pw.length>=6)score++;
+  if(pw.length>=10)score++;
+  if(/[A-Z]/.test(pw))score++;
+  if(/[0-9]/.test(pw))score++;
+  if(/[^A-Za-z0-9]/.test(pw))score++;
+  const levels=[
+    {w:'20%',bg:'#FF4D6D',t:'Too short'},
+    {w:'40%',bg:'#FF4D6D',t:'Weak'},
+    {w:'60%',bg:'#F5A623',t:'OK'},
+    {w:'80%',bg:'#F5A623',t:'Good'},
+    {w:'100%',bg:'#00C97A',t:'Strong'},
+  ];
+  const l=levels[Math.min(score,4)];
+  fill.style.width=l.w;fill.style.background=l.bg;lbl.textContent=l.t;
+}
+
 // ── SETUP FLOW ───────────────────────────────────────────
 let selectedRole='player';
 function pickRole(r){
@@ -1257,20 +1367,61 @@ function pickRole(r){
 
 async function submitSetup(){
   const username=document.getElementById('inUsername').value.trim();
-  if(!username){showErr('setupErr','Enter your name to continue.');return;}
+  const pw=document.getElementById('inPassword').value;
+  const pw2=document.getElementById('inPassword2').value;
+  if(!username){showErr('setupErr','Enter a username.');return;}
+  if(pw.length<6){showErr('setupErr','Password must be at least 6 characters.');return;}
+  if(pw!==pw2){showErr('setupErr','Passwords don\'t match.');return;}
   showErr('setupErr','');
+  // Check username not taken
   const existing=await db.collection('users').where('username','==',username).limit(1).get();
-  if(!existing.empty&&existing.docs[0].id!==S.uid){showErr('setupErr','That name is taken — try another!');return;}
+  if(!existing.empty){showErr('setupErr','That username is taken — try another!');return;}
+  // Hash password + create account
+  const pwHash=await hashPassword(pw);
   S.uid=uuid();
   localStorage.setItem('hl_uid',S.uid);
   const userData={
-    username,role:selectedRole,squadId:null,
+    username,role:selectedRole,squadId:null,pwHash,
     xp:0,streak:0,longestStreak:0,totalSessions:0,totalMinutes:0,lastDate:null,
     earned:[],createdAt:Date.now()
   };
   await db.collection('users').doc(S.uid).set(userData);
   S.user={id:S.uid,...userData};
-  if(selectedRole==='coach'){
+  routeToSquadScreen();
+}
+
+async function submitLogin(){
+  const username=document.getElementById('inLoginUsername').value.trim();
+  const pw=document.getElementById('inLoginPassword').value;
+  if(!username){showErr('loginErr','Enter your username.');return;}
+  if(!pw){showErr('loginErr','Enter your password.');return;}
+  showErr('loginErr','');
+  const existing=await db.collection('users').where('username','==',username).limit(1).get();
+  if(existing.empty){showErr('loginErr','Username not found.');return;}
+  const userDoc=existing.docs[0];
+  const userData=userDoc.data();
+  // Legacy accounts (no password set) — migrate on first login
+  if(!userData.pwHash){
+    const pwHash=await hashPassword(pw);
+    await db.collection('users').doc(userDoc.id).update({pwHash});
+    userData.pwHash=pwHash;
+  }
+  const pwHash=await hashPassword(pw);
+  if(pwHash!==userData.pwHash){showErr('loginErr','Incorrect password.');return;}
+  S.uid=userDoc.id;
+  localStorage.setItem('hl_uid',S.uid);
+  S.user={id:S.uid,...userData};
+  if(S.user.squadId){
+    const squadDoc=await db.collection('squads').doc(S.user.squadId).get();
+    if(squadDoc.exists)S.squad={id:squadDoc.id,...squadDoc.data()};
+    enterApp();
+  } else {
+    routeToSquadScreen();
+  }
+}
+
+function routeToSquadScreen(){
+  if(S.user.role==='coach'){
     document.getElementById('squadHeading').textContent='Create your squad';
     document.getElementById('squadSub').textContent='Give your squad a name. Players will use your join code to connect.';
     document.getElementById('squadIco').textContent='📋';
@@ -1577,32 +1728,23 @@ function confirmReset() {
 // ── INIT ─────────────────────────────────────────────────
 async function init(){
   S.uid=localStorage.getItem('hl_uid');
-  if(!S.uid){showScreen('s-setup');return;}
+  if(!S.uid){showScreen('s-welcome');return;}
   try{
     const userDoc=await db.collection('users').doc(S.uid).get();
-    if(!userDoc.exists){localStorage.removeItem('hl_uid');showScreen('s-setup');return;}
+    if(!userDoc.exists){localStorage.removeItem('hl_uid');showScreen('s-welcome');return;}
     S.user={id:S.uid,...userDoc.data()};
     if(S.user.squadId){
       const squadDoc=await db.collection('squads').doc(S.user.squadId).get();
       if(squadDoc.exists)S.squad={id:squadDoc.id,...squadDoc.data()};
       enterApp();
     } else {
-      if(S.user.role==='coach'){
-        document.getElementById('coachSquadForm').style.display='block';
-        document.getElementById('playerSquadForm').style.display='none';
-        document.getElementById('squadHeading').textContent='Create your squad';
-        document.getElementById('squadSub').textContent='Give your squad a name. Players use your join code to connect.';
-        document.getElementById('squadIco').textContent='📋';
-      } else {
-        document.getElementById('coachSquadForm').style.display='none';
-        document.getElementById('playerSquadForm').style.display='block';
-        document.getElementById('squadHeading').textContent='Join your squad';
-        document.getElementById('squadSub').textContent='Ask your coach for the 6-character join code.';
-        document.getElementById('squadIco').textContent='🏀';
-      }
-      showScreen('s-squad');
+      routeToSquadScreen();
     }
-  }catch(e){console.error('Init error',e);localStorage.removeItem('hl_uid');showScreen('s-setup');}
+  }catch(e){
+    // Network error — don't wipe localStorage, just show welcome
+    console.error('Init error',e);
+    showScreen('s-welcome');
+  }
 }
 function resetApp(){localStorage.removeItem('hl_uid');location.reload();}
 
@@ -2101,9 +2243,11 @@ function goTab(t){
 
 // ── BOOT ─────────────────────────────────────────────────
 document.getElementById('inUsername').addEventListener('keydown',e=>{if(e.key==='Enter')submitSetup();});
+document.getElementById('inLoginUsername').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('inLoginPassword').focus();});
+document.getElementById('inLoginPassword').addEventListener('keydown',e=>{if(e.key==='Enter')submitLogin();});
 document.getElementById('inJoinCode').addEventListener('input',e=>{e.target.value=e.target.value.toUpperCase();});
 if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}
-window.addEventListener('load',()=>{ if(!db){showScreen('s-setup');return;} init().catch(e=>{console.error(e);localStorage.removeItem('hl_uid');showScreen('s-setup');}); });
+window.addEventListener('load',()=>{ if(!db){showScreen('s-welcome');return;} init().catch(e=>{console.error(e);showScreen('s-welcome');}); });
 </script>
 
 <!-- PROFILE DRAWER -->
